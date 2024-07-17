@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= @title %> | Flex Framework</title>
+    <title><%= @title %> | Flex Web Framework</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script>
@@ -73,7 +73,7 @@
                     </a>
                 </div>
                 <div class="mt-8 md:mt-0 md:order-1">
-                    <p class="text-center text-base text-gray-400">&copy; <%= DateTime.utc_now().year %> Flex Framework. All rights reserved.</p>
+                    <p class="text-center text-base text-gray-400">&copy; <%= DateTime.utc_now().year %> Flex Web Framework. All rights reserved.</p>
                 </div>
             </div>
         </footer>
