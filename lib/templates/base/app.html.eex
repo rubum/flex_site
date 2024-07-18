@@ -22,6 +22,14 @@
             }
         }
     </script>
+    <style>
+        #mobile-menu {
+            display: none;
+        }
+        #mobile-menu.active {
+            display: block;
+        }
+    </style>
 </head>
 <body class="h-full font-sans antialiased text-gray-900 bg-white">
     <div class="flex flex-col min-h-full">
@@ -38,16 +46,28 @@
                                 <span class="ml-2">Flex</span>
                             </div>
                         </a>
-
-                        <div class="ml-10 space-x-8">
+                        <div class="hidden ml-10 space-x-8 lg:block">
                             <a href="/" class="text-base font-medium text-gray-600 hover:text-flex-primary">Home</a>
                             <a href="/about" class="text-base font-medium text-gray-600 hover:text-flex-primary">About</a>
                             <a href="https://github.com/rubum/flex" class="text-base font-medium text-gray-600 hover:text-flex-primary">GitHub</a>
                         </div>
                     </div>
-                    <div class="ml-10 space-x-4">
-                        <a href="https://hexdocs.pm/flex_web/" class="inline-block bg-flex-primary py-2 px-4 border border-transparent rounded-md text-base font-medium text-white hover:bg-flex-secondary">Documentation</a>
+                    <div class="ml-10 space-x-4 hidden lg:block">
+                        <a href="https://hexdocs.pm/flex_web" class="inline-block bg-flex-primary py-2 px-4 border border-transparent rounded-md text-base font-medium text-white hover:bg-flex-secondary">Documentation</a>
                     </div>
+                    <div class="lg:hidden">
+                        <button id="menu-toggle" class="text-gray-600 hover:text-flex-primary">
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div id="mobile-menu" class="py-4 lg:hidden">
+                    <a href="/" class="block py-2 text-base font-medium text-gray-600 hover:text-flex-primary">Home</a>
+                    <a href="/about" class="block py-2 text-base font-medium text-gray-600 hover:text-flex-primary">About</a>
+                    <a href="https://github.com/rubum/flex" class="block py-2 text-base font-medium text-gray-600 hover:text-flex-primary">GitHub</a>
+                    <a href="https://hexdocs.pm/flex_web/" class="inline-block mt-2 bg-flex-primary py-2 px-4 border border-transparent rounded-md text-base font-medium text-white hover:bg-flex-secondary">Documentation</a>
                 </div>
             </nav>
         </header>
@@ -78,5 +98,35 @@
             </div>
         </footer>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const desktopMenu = document.querySelector('.hidden.ml-10.space-x-8.lg\\:block');
+            const lgBreakpoint = 1024; // This should match Tailwind's lg breakpoint
+
+            function toggleMenuBasedOnScreenSize() {
+                if (window.innerWidth >= lgBreakpoint) {
+                    mobileMenu.classList.remove('active');
+                    desktopMenu.style.display = 'block';
+                } else {
+                    desktopMenu.style.display = 'none';
+                    // Don't automatically hide the mobile menu here
+                    // as it might be intentionally open on smaller screens
+                }
+            }
+
+            // Toggle mobile menu when button is clicked
+            menuToggle.addEventListener('click', function() {
+                mobileMenu.classList.toggle('active');
+            });
+
+            // Check screen size on load
+            toggleMenuBasedOnScreenSize();
+
+            // Check screen size on resize
+            window.addEventListener('resize', toggleMenuBasedOnScreenSize);
+        });
+    </script>
 </body>
 </html>
